@@ -36,8 +36,6 @@ namespace SilverBotDsharp
 
         private static async Task MainAsync()
         {
-            using (SentrySdk.Init(***REMOVED***))
-            {
                 discord = new DiscordClient(new DiscordConfiguration
                 {
                     Token = config.Token,
@@ -64,6 +62,5 @@ namespace SilverBotDsharp
                 bing.sbing(discord);
                 await Task.Delay(-1);
             }
-        }
     }
 }
