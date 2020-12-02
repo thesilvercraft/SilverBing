@@ -23,7 +23,9 @@ namespace SilverBotDsharp
         private static Config config = new Config();
         private static InteractivityExtension interactivity;
 
-        private static void Main(string[] args)
+        public static InteractivityExtension Interactivity { get => interactivity; set => interactivity = value; }
+
+        private static void Main()
         {
             config = Config.Get();
             MainAsync().ConfigureAwait(false).GetAwaiter().GetResult();
@@ -36,31 +38,31 @@ namespace SilverBotDsharp
 
         private static async Task MainAsync()
         {
-                discord = new DiscordClient(new DiscordConfiguration
-                {
-                    Token = config.Token,
-                    TokenType = TokenType.Bot,
-                    MinimumLogLevel = Microsoft.Extensions.Logging.LogLevel.Information,
-                });
-                string[] v = { config.Prefix };
-                commands = discord.UseCommandsNext(new CommandsNextConfiguration
-                {
-                    EnableMentionPrefix = true,
-                    StringPrefixes = v,
-                });
-                commands.RegisterCommands<bing>();
-                await discord.ConnectAsync();
-                await Task.Delay(2000);
-                DiscordActivity activity = new DiscordActivity
-                {
-                    ActivityType = ActivityType.Watching,
-                    Name = "Bingers",
-                };
-                await discord.UpdateStatusAsync(activity);
-                interactivity = discord.UseInteractivity();
-                Console.WriteLine("Logged in as " + discord.CurrentUser.Username);
-                bing.sbing(discord);
-                await Task.Delay(-1);
-            }
+            discord = new DiscordClient(new DiscordConfiguration
+            {
+                Token = config.Token,
+                TokenType = TokenType.Bot,
+                MinimumLogLevel = Microsoft.Extensions.Logging.LogLevel.Information,
+            });
+            string[] v = { config.Prefix };
+            commands = discord.UseCommandsNext(new CommandsNextConfiguration
+            {
+                EnableMentionPrefix = true,
+                StringPrefixes = v,
+            });
+            commands.RegisterCommands<Bing>();
+            await discord.ConnectAsync();
+            await Task.Delay(2000);
+            DiscordActivity activity = new DiscordActivity
+            {
+                ActivityType = ActivityType.Watching,
+                Name = "Bingers",
+            };
+            await discord.UpdateStatusAsync(activity);
+            Interactivity = discord.UseInteractivity();
+            Console.WriteLine("Logged in as " + discord.CurrentUser.Username);
+            await Bing.Sbing(discord);
+            await Task.Delay(-1);
+        }
     }
 }
