@@ -274,6 +274,20 @@ namespace SilverBotDsharp.Modules
 
         private static readonly IEnumerable<int> range = Enumerable.Range(1900, 2000);
 
+        [Command("git")]
+        [Aliases("github", "code")]
+        [Description("ehh some nerd shit")]
+        public async Task git(CommandContext ctx)
+        {
+            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            bob.WithTitle("thesilvercraft/SilverBing");
+            bob.WithUrl("https://github.com/thesilvercraft/SilverBing");
+            bob.WithDescription($"the bot we all love the one the only BING BOT. Contribute to thesilvercraft/SilverBing development by creating an account on GitHub.");
+            bob.WithAuthor("GitHub");
+            bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
+            await ctx.RespondAsync("<https://github.com/thesilvercraft/SilverBing>", embed: bob.Build());
+        }
+
         [Command("leaderbing")]
         [Description("Shows you the leaderbing of this fine establishment(guild)")]
         [RequireGuild()]
