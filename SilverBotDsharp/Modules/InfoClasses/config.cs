@@ -35,8 +35,10 @@ namespace SilverBotDsharp.Modules.infoclasses
                 using (StreamWriter streamWriter = new StreamWriter("bingbt.json"))
                 {
                     Config config = new Config();
+                    var options = new JsonSerializerOptions();
+                    options.WriteIndented = true;
 
-                    streamWriter.Write(JsonSerializer.Serialize(config));
+                    streamWriter.Write(JsonSerializer.Serialize(config, options));
                 }
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You should have a bingbt.json file where you store the exe it should open in your prefered text editor, fill it out thanks");
