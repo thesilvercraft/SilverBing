@@ -62,11 +62,11 @@ namespace SilverBotDsharp.Modules
         private static async Task SendbingAsync([Description("the channel to send to")] DiscordChannel ch, [Description("client")] DiscordClient cl)
         {
             var interactivity = cl.GetInteractivity();
-            DiscordMessage e = await ch.SendMessageAsync("<:micorsoft_bing_0_0:779071679271010324><:micorsoft_bing_1_0:779071679125127190><:micorsoft_bing_2_0:779071680064126999><:micorsoft_bing_3_0:779071679598034945><:micorsoft_bing_4_0:779071680017858590><:micorsoft_bing_5_0:779071680383156264><:micorsoft_bing_6_0:779071679908937749><:micorsoft_bing_7_0:779071680131629086>" + Environment.NewLine +
-"<:micorsoft_bing_0_1:779071679019876393><:micorsoft_bing_1_1:779071679862538313><:micorsoft_bing_2_1:779071679879446628><:micorsoft_bing_3_1:779071679870795847><:micorsoft_bing_4_1:779071680114196480><:micorsoft_bing_5_1:779071680064258079><:micorsoft_bing_6_1:779071680277774336><:micorsoft_bing_7_1:779071680151683083>");
-            await e.CreateReactionAsync(DiscordEmoji.FromName(cl, ":beginner:"));
             var conf = Program.GetConfig();
-            var react = await interactivity.WaitForReactionAsync((x => x.Emoji == DiscordEmoji.FromName(cl, ":beginner:") && x.Message == e && x.User != cl.CurrentUser), Config.timeSpan(conf.Timespan)); ;
+            DiscordMessage e = await ch.SendMessageAsync(conf.Message);
+            await e.CreateReactionAsync(DiscordEmoji.FromName(cl, conf.Emote));
+
+            var react = await interactivity.WaitForReactionAsync((x => x.Emoji == DiscordEmoji.FromName(cl, conf.Emote) && x.Message == e && x.User != cl.CurrentUser), Config.timeSpan(conf.Timespan)); ;
             if (!react.TimedOut)
             {
                 using var db = new LiteDatabase(@"Filename=bingers.db; Connection=shared");
@@ -343,7 +343,6 @@ namespace SilverBotDsharp.Modules
             tim = new Timer();
             var conf = Program.GetConfig();
             tim.Interval = Config.timeSpan(conf.Timespan).TotalMilliseconds;//time in milisecounds
-            //  tim.Interval = 4 * 1000;
             tim.Elapsed += Tim_ElapsedAsync;
             cl = e;
             tim.Start();
