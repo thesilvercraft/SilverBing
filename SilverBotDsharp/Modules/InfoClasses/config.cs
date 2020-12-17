@@ -21,7 +21,7 @@ namespace SilverBotDsharp.Modules.infoclasses
 
         public static TimeSpan timeSpan(timespan timespan)
         {
-            return new TimeSpan(timespan.Days, timespan.Hours, timespan.Minutes, timespan.Secounds, timespan.MiliSecounds);
+            return new TimeSpan(timespan.Days, timespan.Hours, timespan.Minutes, timespan.Secounds, timespan.MilliSecounds);
         }
 
         public static Config Get()
@@ -64,6 +64,6 @@ namespace SilverBotDsharp.Modules.infoclasses
         public int Hours { get; set; } = 0;
         public int Minutes { get; set; } = 5;
         public int Secounds { get; set; } = 0;
-        public int MiliSecounds { get; set; } = 0;
+        public int MilliSecounds { get; set; } = 0;
     }
 }
