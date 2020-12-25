@@ -61,6 +61,7 @@ namespace SilverBotDsharp
             await discord.UpdateStatusAsync(activity);
             Interactivity = discord.UseInteractivity();
             Console.WriteLine("Logged in as " + discord.CurrentUser.Username);
+            binglist.load_config();
             await Bing.Sbing(discord);
             await Task.Delay(-1);
         }

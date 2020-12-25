@@ -76,82 +76,21 @@ namespace SilverBotDsharp.Modules
                 if (thing != null)
                 {
                     thing.Bingtimes++;
-                    if (thing.Bingtimes == 69)
+                    var list = binglist.bingtexts.Where(b => (b.day == DateTime.Today.Day || b.day == null) && (b.month == DateTime.Today.Month || b.month == null) && (b.year == DateTime.Today.Year || b.year == null) && (b.hour == DateTime.Now.Hour || b.hour == null) && (b.minute == DateTime.Now.Minute || b.minute == null) && (b.number_of_bings_of_user == thing.Bingtimes || b.number_of_bings_of_user == null) && (b.day_of_week == (int)DateTime.Today.DayOfWeek || b.day_of_week == null)).ToArray();
+                    string message = "";
+                    foreach (var o in list)
                     {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first 69 times. NOICE");
+                        message += String.Format(o.text, react.Result.User.Mention, ((DiscordMember)react.Result.User).Nickname) + Environment.NewLine;
                     }
-                    else if (thing.Bingtimes == 42)
+                    await ch.SendMessageAsync(message);
+                    if (react.Result.User.Id == 687387957296103541 && DateTime.Today.Day == 8 && DateTime.Today.Month == 3)
                     {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first 42 times. Microsoft bing is truly the meaning of life the universe and everything");
+                        await ch.SendMessageAsync(react.Result.User.Mention + " happy birthday Wbbubler https://cdn.discordapp.com/attachments/728360861483401240/781827459867344916/cooltext369813039532598.png");
                     }
-                    else if (thing.Bingtimes == 420)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first 420 times.");
-                    }
-                    else if (thing.Bingtimes == 1420)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first cheese times.");
-                    }
-                    else if (thing.Bingtimes == 21)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first 9+10=21 times.");
-                    }
-                    else if (thing.Bingtimes == 13 && DateTime.Today.DayOfWeek == DayOfWeek.Friday && DateTime.Today.Day == 13)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first 13 times and its the friday of 13.");
-                    }
-                    else if (DateTime.Today.Day == 1 && DateTime.Today.Month == 4)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " did not react to the Microsoft bing and his points have been lost. This is truly a sad moment. JK JK APRIL FOOLS AND YOU ARE A FOOL FOR WASTING YOUR DAY ON THIS SHIT MINIGAME ");
-                    }
-                    else if (DateTime.Today.Day == 24 && DateTime.Today.Month == 10)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " a winner is you. Click the link to redeem your prize <https://www.youtube.com/watch?v=dQw4w9WgXcQ>");
-                    }
-                    else if (DateTime.Today.Day == 31 && DateTime.Today.Month == 10)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " recived a spooky microsoft bing");
-                    }
-                    else if (DateTime.Today.Day == 1 && DateTime.Today.Month == 1)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " HAPPY NEW YEAR");
-                    }
-                    else if (DateTime.Today.Day == 14 && DateTime.Today.Month == 2)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " happy valentines day");
-                    }
-                    else if (DateTime.Today.Day == 8 && DateTime.Today.Month == 3)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " happy mothers day (and International Women's Day)");
-                        if (react.Result.User.Id == 687387957296103541)
-                        {
-                            await ch.SendMessageAsync(react.Result.User.Mention + " happy birthday Wbbubler https://cdn.discordapp.com/attachments/728360861483401240/781827459867344916/cooltext369813039532598.png");
-                        }
-                    }
-                    else if (DateTime.Today.Day == EasterSunday(DateTime.Now.Year).Day && DateTime.Today.Month == EasterSunday(DateTime.Now.Year).Month)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " happy easter sunday");
-                    }
-                    else if (DateTime.Today.Day == (EasterSunday(DateTime.Now.Year).Day - 2) && DateTime.Today.Month == EasterSunday(DateTime.Now.Year).Month)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " happy easter friday");
-                    }
-                    else if (DateTime.Today.Day == 25 && DateTime.Today.Month == 12)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " happy cristmas");
-                    }
-                    else if (thing.Bingtimes == 69420)
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first 69420 times. This is truly an achivement.");
-                    }
-                    else
-                    {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " reacted to the Microsoft bing first.");
-                    }
+
                     try
                     {
-                        var er = col.Update(thing);
-                        //Console.WriteLine(er);
+                        col.Update(thing);
                     }
                     catch
                     {
@@ -390,6 +329,11 @@ namespace SilverBotDsharp.Modules
                         catch (NotFoundException)
                         {
                             Debug.WriteLine("Channnel not found :(");
+                            Todel.Add(thing);
+                        }
+                        catch (UnauthorizedException)
+                        {
+                            Debug.WriteLine("I HAS NO PERMS FUCK");
                             Todel.Add(thing);
                         }
                     }
