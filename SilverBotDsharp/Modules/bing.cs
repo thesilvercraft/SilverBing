@@ -227,6 +227,18 @@ namespace SilverBotDsharp.Modules
             await ctx.RespondAsync("<https://github.com/thesilvercraft/SilverBing>", embed: bob.Build());
         }
 
+        [Command("bingsreload")]
+        [Description("reload the config for bings")]
+        [RequireOwner()]
+        public async Task reload(CommandContext ctx)
+        {
+            binglist.load_config();
+            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            bob.WithTitle("Reloaded binglist for ya.");
+            bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
+            await ctx.RespondAsync(embed: bob.Build());
+        }
+
         [Command("leaderbing")]
         [Description("Shows you the leaderbing of this fine establishment(guild)")]
         [RequireGuild()]
