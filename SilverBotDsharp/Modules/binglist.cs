@@ -18,19 +18,17 @@ namespace SilverBotDsharp.Modules
             Console.WriteLine("lodain config");
             if (File.Exists("BINGSYEAH.json"))
             {
-                using (StreamReader Filejosn = new StreamReader("BINGSYEAH.json"))
-                {
-                    bingtexts = JsonSerializer.Deserialize<bingtext[]>(Filejosn.ReadToEnd());
-                }
+                using StreamReader Filejosn = new StreamReader("BINGSYEAH.json");
+                bingtexts = JsonSerializer.Deserialize<bingtext[]>(Filejosn.ReadToEnd());
             }
             else
             {
-                using (StreamWriter writer = new StreamWriter("BINGSYEAH.json"))
+                using StreamWriter writer = new StreamWriter("BINGSYEAH.json");
+                var options = new JsonSerializerOptions
                 {
-                    var options = new JsonSerializerOptions();
-                    options.WriteIndented = true;
-                    writer.Write(JsonSerializer.Serialize(bingtexts, options));
-                }
+                    WriteIndented = true
+                };
+                writer.Write(JsonSerializer.Serialize(bingtexts, options));
             }
         }
     }

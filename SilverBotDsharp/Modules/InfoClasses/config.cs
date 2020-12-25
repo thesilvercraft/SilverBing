@@ -21,7 +21,7 @@ namespace SilverBotDsharp.Modules.infoclasses
 
         public static TimeSpan timeSpan(timespan timespan)
         {
-            return new TimeSpan(timespan.Days, timespan.Hours, timespan.Minutes, timespan.Secounds, timespan.MilliSecounds);
+            return new TimeSpan(timespan.Days, timespan.Hours, timespan.Minutes, timespan.Seconds, timespan.MilliSeconds);
         }
 
         public static Config Get()
@@ -40,8 +40,10 @@ namespace SilverBotDsharp.Modules.infoclasses
                 using (StreamWriter streamWriter = new StreamWriter("bingbt.json"))
                 {
                     Config config = new Config();
-                    var options = new JsonSerializerOptions();
-                    options.WriteIndented = true;
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true
+                    };
 
                     streamWriter.Write(JsonSerializer.Serialize(config, options));
                 }
@@ -63,7 +65,7 @@ namespace SilverBotDsharp.Modules.infoclasses
         public int Days { get; set; } = 0;
         public int Hours { get; set; } = 0;
         public int Minutes { get; set; } = 5;
-        public int Secounds { get; set; } = 0;
-        public int MilliSecounds { get; set; } = 0;
+        public int Seconds { get; set; } = 0;
+        public int MilliSeconds { get; set; } = 0;
     }
 }
