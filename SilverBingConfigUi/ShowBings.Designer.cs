@@ -48,7 +48,7 @@ namespace SilverBingConfigUi
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(12, 41);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(311, 154);
+            this.listView1.Size = new System.Drawing.Size(725, 255);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
