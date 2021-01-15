@@ -55,8 +55,8 @@ namespace SilverBotDsharp
             await Task.Delay(2000);
             DiscordActivity activity = new DiscordActivity
             {
-                ActivityType = ActivityType.Watching,
-                Name = "Bingers",
+                ActivityType = ActivityType.Playing,
+                Name = "Loading statuses",
             };
             await discord.UpdateStatusAsync(activity);
             Interactivity = discord.UseInteractivity();
