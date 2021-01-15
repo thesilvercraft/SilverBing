@@ -11,7 +11,7 @@ namespace SilverBotDsharp.Modules.infoclasses
     {
         public string Prefix { get; set; } = "sb!";
         public string Token { get; set; } = "UR TOKEN HERE";
-
+        public string Invite { get; set; } = "https://discord.com/api/oauth2/authorize?client_id={0}&permissions=2147483639&scope=bot";
         public timespan Timespan { get; set; } = new timespan();
 
         public string Message { get; set; } = "<:micorsoft_bing_0_0:779071679271010324><:micorsoft_bing_1_0:779071679125127190><:micorsoft_bing_2_0:779071680064126999><:micorsoft_bing_3_0:779071679598034945><:micorsoft_bing_4_0:779071680017858590><:micorsoft_bing_5_0:779071680383156264><:micorsoft_bing_6_0:779071679908937749><:micorsoft_bing_7_0:779071680131629086>" + Environment.NewLine +

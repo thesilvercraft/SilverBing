@@ -15,7 +15,7 @@ namespace SilverBotDsharp.Modules
 
         public static void load_config()
         {
-            Console.WriteLine("lodain config");
+            Console.WriteLine("Loading bing texts");
             if (File.Exists("BINGSYEAH.json"))
             {
                 using StreamReader Filejosn = new StreamReader("BINGSYEAH.json");

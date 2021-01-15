@@ -239,6 +239,30 @@ namespace SilverBotDsharp.Modules
             await ctx.RespondAsync(embed: bob.Build());
         }
 
+        [Command("splashesreload")]
+        [Description("reload the config for splashes")]
+        [RequireOwner()]
+        public async Task reloadsplashes(CommandContext ctx)
+        {
+            Splashes.Get(true);
+            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            bob.WithTitle("Reloaded splashes for ya.");
+            bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
+            await ctx.RespondAsync(embed: bob.Build());
+        }
+
+        [Command("invite")]
+        [Description("invite me to your server")]
+        public async Task invite(CommandContext ctx)
+        {
+            Splashes.Get(true);
+            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            bob.WithTitle("Invite link.");
+            bob.WithDescription(string.Format(Program.GetConfig().Invite, ctx.Client.CurrentUser.Id));
+            bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
+            await ctx.RespondAsync(embed: bob.Build());
+        }
+
         [Command("leaderbing")]
         [Description("Shows you the leaderbing of this fine establishment(guild)")]
         [RequireGuild()]

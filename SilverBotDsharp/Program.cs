@@ -52,22 +52,18 @@ namespace SilverBotDsharp
             });
             commands.RegisterCommands<Bing>();
             await discord.ConnectAsync();
-            await Task.Delay(2000);
-            DiscordActivity activity = new DiscordActivity
-            {
-                ActivityType = ActivityType.Playing,
-                Name = "Loading statuses",
-            };
-            await discord.UpdateStatusAsync(activity);
+
             Interactivity = discord.UseInteractivity();
             Console.WriteLine("Logged in as " + discord.CurrentUser.Username);
+            await Task.Delay(4000);
             binglist.load_config();
+            await Task.Delay(4000);
             await Bing.Sbing(discord);
             while (true)
             {
                 await discord.UpdateStatusAsync(Splashes.GetSingle());
+                await Task.Delay(10000);
             }
-            await Task.Delay(-1);
         }
     }
 }
