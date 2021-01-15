@@ -23,8 +23,8 @@ namespace SilverBingConfigUi
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var bingeditor = new BingEditor();
-            bingeditor.Show();
+            var showbings = new ShowBings();
+            showbings.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

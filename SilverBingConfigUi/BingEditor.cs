@@ -31,6 +31,7 @@ namespace SilverBingConfigUi
 
         private static readonly string[] usernames = { "SilverDiamond", "Wbbubier", "Qwerty" };
         private static readonly string[] nicknames = { "SilverDimond", "Wbbubler", "Bong God" };
+        public Bingtext result;
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -48,9 +49,53 @@ namespace SilverBingConfigUi
                 }
             }
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            result = new Bingtext
+            {
+                Text = textBox1.Text
+            };
+            if (numericUpDown1.Value != -1)
+            {
+                result.Number_of_bings_of_user = (ulong?)numericUpDown1.Value;
+            }
+            if ((string)comboBox1.SelectedItem != "None")
+            {
+                result.Hour = Convert.ToInt32((string)comboBox1.SelectedItem);
+            }
+            if ((string)comboBox2.SelectedItem != "None")
+            {
+                result.Minute = Convert.ToInt32((string)comboBox2.SelectedItem);
+            }
+            if (comboBox2.SelectedIndex != 0)
+            {
+                result.Minute = comboBox2.SelectedIndex - 1;
+            }
+            string date = textBox2.Text.ToLower();
+            string[] dates = date.Split(".");
+            if (dates[0] != "none")
+            {
+                result.Day = Convert.ToInt32(dates[0]);
+            }
+            if (dates[1] != "none")
+            {
+                result.Month = Convert.ToInt32(dates[1]);
+            }
+            if (dates[2] != "none")
+            {
+                result.Year = Convert.ToInt32(dates[2]);
+            }
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 
-    public class bingtext
+    public class Bingtext
     {
         [JsonPropertyName("text")]
         public string Text { get; set; } = "{0} reacted to the Microsoft bing first.";

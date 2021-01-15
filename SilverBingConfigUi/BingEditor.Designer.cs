@@ -41,12 +41,16 @@ namespace SilverBingConfigUi
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -56,6 +60,7 @@ namespace SilverBingConfigUi
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -181,7 +186,7 @@ namespace SilverBingConfigUi
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(90, 12);
+            this.groupBox1.Location = new System.Drawing.Point(28, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 60);
             this.groupBox1.TabIndex = 4;
@@ -193,7 +198,7 @@ namespace SilverBingConfigUi
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(65, 142);
+            this.groupBox2.Location = new System.Drawing.Point(22, 142);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(658, 207);
             this.groupBox2.TabIndex = 5;
@@ -251,7 +256,7 @@ namespace SilverBingConfigUi
             // 
             this.groupBox5.Controls.Add(this.groupBox6);
             this.groupBox5.Controls.Add(this.numericUpDown1);
-            this.groupBox5.Location = new System.Drawing.Point(285, 13);
+            this.groupBox5.Location = new System.Drawing.Point(231, 12);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(218, 123);
             this.groupBox5.TabIndex = 7;
@@ -260,7 +265,6 @@ namespace SilverBingConfigUi
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Location = new System.Drawing.Point(24, 49);
             this.groupBox6.Name = "groupBox6";
@@ -268,15 +272,6 @@ namespace SilverBingConfigUi
             this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Help";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 15);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "-1 is none";
             // 
             // label3
             // 
@@ -304,22 +299,42 @@ namespace SilverBingConfigUi
             0,
             -2147483648});
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(237, 30);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "day.mouth.year\r\nWarning: Doesn\'t validate so dont break thx";
+            // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.textBox2);
             this.groupBox7.Controls.Add(this.groupBox8);
-            this.groupBox7.Location = new System.Drawing.Point(533, 13);
+            this.groupBox7.Location = new System.Drawing.Point(473, 13);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(225, 123);
+            this.groupBox7.Size = new System.Drawing.Size(270, 123);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Date";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(12, 20);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(153, 23);
+            this.textBox2.TabIndex = 10;
+            this.textBox2.Text = "none.none.none";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.label5);
             this.groupBox8.Controls.Add(this.label4);
             this.groupBox8.Location = new System.Drawing.Point(12, 49);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(184, 52);
+            this.groupBox8.Size = new System.Drawing.Size(252, 68);
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Help";
@@ -333,11 +348,52 @@ namespace SilverBingConfigUi
             this.label4.TabIndex = 0;
             this.label4.Text = "-1 is none";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(696, 343);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "OK";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.comboBox4);
+            this.groupBox9.Location = new System.Drawing.Point(28, 79);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(165, 60);
+            this.groupBox9.TabIndex = 9;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Day of week";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "None",
+            "Sunday ",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"});
+            this.comboBox4.Location = new System.Drawing.Point(6, 22);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(97, 28);
+            this.comboBox4.TabIndex = 0;
+            this.comboBox4.Text = "None";
+            // 
             // BingEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 396);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox2);
@@ -357,8 +413,10 @@ namespace SilverBingConfigUi
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -383,5 +441,9 @@ namespace SilverBingConfigUi
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.ComboBox comboBox4;
     }
 }
