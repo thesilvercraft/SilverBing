@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -16,7 +17,7 @@ namespace SilverBingConfigUi
             InitializeComponent();
         }
 
-        private Bingtext[] bingtexts;
+        private List<Bingtext> bingtexts;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -33,22 +34,50 @@ namespace SilverBingConfigUi
                     filePath = openFileDialog.FileName;
                     using (StreamReader reader = new StreamReader(filePath))
                     {
-                        bingtexts = System.Text.Json.JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd());
-                        foreach (var item in bingtexts)
+                        bingtexts = System.Text.Json.JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
+                        for (int i = 0; i < bingtexts.Count; i++)
+
                         {
-                            
+                            listView1.Items.Add(i.ToString());
                         }
+                        listView1.Items.Add("+");
                     }
                 }
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 
-        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (listView1.SelectedItems.Count == 1)
+                {
+                    if (listView1.SelectedItems[0].Text == "+")
+                    {
+                        //create new bing??
+                        var editbing = new BingEditor();
+                        if (editbing.ShowDialog() == DialogResult.OK)
+                        {
+                            bingtexts.Add(editbing.result);
+                            listView1.Items[bingtexts.Count - 1].Text = (bingtexts.Count - 1).ToString();
+                            listView1.Items.Add("+");
+                        }
+                    }
+                    else
+                    {
+                        //bruh moment
+                        var editbing = new BingEditor(bingtexts[Convert.ToInt32(listView1.SelectedItems[0].Text)]);
+                        if (editbing.ShowDialog() == DialogResult.OK)
+                        {
+                            bingtexts[Convert.ToInt32(listView1.SelectedItems[0].Text)] = editbing.result;
+                        }
+                    }
+                }
+            }
         }
     }
 }

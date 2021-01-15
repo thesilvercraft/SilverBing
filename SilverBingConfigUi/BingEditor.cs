@@ -17,6 +17,17 @@ namespace SilverBingConfigUi
             InitializeComponent();
         }
 
+        public BingEditor(Bingtext text)
+        {
+            InitializeComponent();
+            textBox1.Text = text.Text;
+            numericUpDown1.Value = text.Number_of_bings_of_user != null ? (decimal)text.Number_of_bings_of_user : -1;
+            comboBox1.SelectedItem = text.Hour != null ? text.Hour : "None";
+            comboBox2.SelectedItem = text.Minute != null ? text.Minute : "None";
+            comboBox4.SelectedIndex = text.Day_of_week == null ? 0 : (int)text.Day_of_week + 1;
+            textBox2.Text = $"{(text.Day == null ? "none" : text.Day)}.{(text.Month == null ? "none" : text.Month)}.{(text.Year == null ? "none" : text.Year)}";
+        }
+
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
         }
@@ -74,7 +85,7 @@ namespace SilverBingConfigUi
             }
             if (comboBox2.SelectedIndex != 0)
             {
-                result.Minute = comboBox2.SelectedIndex - 1;
+                result.Day_of_week = comboBox2.SelectedIndex - 1;
             }
             string date = textBox2.Text.ToLower();
             string[] dates = date.Split(".");
