@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace SilverBingConfigUi
 {
@@ -18,11 +19,10 @@ namespace SilverBingConfigUi
         }
 
         private List<Bingtext> bingtexts;
+        private string filePath = string.Empty;
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var filePath = string.Empty;
-
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "JSON files (BINGSYEAH.json)|*.json";
@@ -34,7 +34,7 @@ namespace SilverBingConfigUi
                     filePath = openFileDialog.FileName;
                     using (StreamReader reader = new StreamReader(filePath))
                     {
-                        bingtexts = System.Text.Json.JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
+                        bingtexts = JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
                         for (int i = 0; i < bingtexts.Count; i++)
 
                         {
@@ -44,10 +44,6 @@ namespace SilverBingConfigUi
                     }
                 }
             }
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -77,6 +73,24 @@ namespace SilverBingConfigUi
                         }
                     }
                 }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(filePath) || bingtexts == null)
+            {
+                MessageBox.Show("fucking dumbass why did you click it when there isn't even a file opened -Marcel D 2021", "Error",
+    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                writer.Write(JsonSerializer.Serialize(bingtexts.ToArray(), options));
             }
         }
     }

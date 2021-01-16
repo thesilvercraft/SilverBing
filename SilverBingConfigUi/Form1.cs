@@ -29,14 +29,14 @@ namespace SilverBingConfigUi
 
         private void button1_Click(object sender, EventArgs e)
         {
+            throw new NotImplementedException();
+            //SplashEditor editor = new SplashEditor();
+            //editor.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
+            throw new NotImplementedException();
         }
     }
 }

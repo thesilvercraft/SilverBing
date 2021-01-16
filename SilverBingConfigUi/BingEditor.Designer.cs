@@ -391,6 +391,7 @@ namespace SilverBingConfigUi
             this.comboBox4.Size = new System.Drawing.Size(97, 28);
             this.comboBox4.TabIndex = 0;
             this.comboBox4.Text = "None";
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // BingEditor
             // 

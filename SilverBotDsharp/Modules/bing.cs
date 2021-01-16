@@ -255,7 +255,6 @@ namespace SilverBotDsharp.Modules
         [Description("invite me to your server")]
         public async Task invite(CommandContext ctx)
         {
-            Splashes.Get(true);
             DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
             bob.WithTitle("Invite link.");
             bob.WithDescription(string.Format(Program.GetConfig().Invite, ctx.Client.CurrentUser.Id));

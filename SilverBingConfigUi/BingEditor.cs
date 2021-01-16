@@ -83,9 +83,9 @@ namespace SilverBingConfigUi
             {
                 result.Minute = Convert.ToInt32((string)comboBox2.SelectedItem);
             }
-            if (comboBox2.SelectedIndex != 0)
+            if ((string)comboBox4.SelectedItem != "None")
             {
-                result.Day_of_week = comboBox2.SelectedIndex - 1;
+                result.Day_of_week = comboBox4.SelectedIndex - 1;
             }
             string date = textBox2.Text.ToLower();
             string[] dates = date.Split(".");
@@ -103,6 +103,10 @@ namespace SilverBingConfigUi
             }
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 
