@@ -1,7 +1,7 @@
 ﻿
 namespace SilverBingConfigUi
 {
-    partial class ShowBings
+    partial class ShowSpashes
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace SilverBingConfigUi
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowBings));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowSpashes));
             this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
@@ -59,7 +59,6 @@ namespace SilverBingConfigUi
             this.listView1.Size = new System.Drawing.Size(666, 306);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // button2
             // 
@@ -71,7 +70,6 @@ namespace SilverBingConfigUi
             this.button2.Text = "Save";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // splitContainer1
             // 
@@ -91,16 +89,16 @@ namespace SilverBingConfigUi
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listView1);
             this.splitContainer1.Size = new System.Drawing.Size(666, 360);
-            this.splitContainer1.TabIndex = 5;
+            this.splitContainer1.TabIndex = 6;
             // 
-            // ShowBings
+            // ShowSpashes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 360);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "ShowBings";
-            this.Text = "ShowBings";
+            this.Name = "ShowSpashes";
+            this.Text = "ShowSpashes";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -110,6 +108,7 @@ namespace SilverBingConfigUi
         }
 
         #endregion
+
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button2;

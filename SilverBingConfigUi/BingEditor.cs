@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace SilverBingConfigUi
 {
@@ -42,7 +43,7 @@ namespace SilverBingConfigUi
 
         private static readonly string[] usernames = { "SilverDiamond", "Wbbubier", "Qwerty" };
         private static readonly string[] nicknames = { "SilverDimond", "Wbbubler", "Bong God" };
-        public Bingtext result;
+        public Bingtext result = new Bingtext();
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -89,24 +90,78 @@ namespace SilverBingConfigUi
             }
             string date = textBox2.Text.ToLower();
             string[] dates = date.Split(".");
-            if (dates[0] != "none")
+            bool[] isnotnull = { dates[0] != "none", dates[1] != "none", dates[2] != "none" };
+            if (isnotnull[0])
             {
                 result.Day = Convert.ToInt32(dates[0]);
             }
-            if (dates[1] != "none")
+            if (isnotnull[1])
             {
                 result.Month = Convert.ToInt32(dates[1]);
             }
-            if (dates[2] != "none")
+            if (isnotnull[2])
             {
                 result.Year = Convert.ToInt32(dates[2]);
             }
-            DialogResult = DialogResult.OK;
-            Close();
+            if (isnotnull.Contains(false) || DateUtils.Is_Valid_Date_Bool((int)result.Day, (int)result.Month, (int)result.Year))
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Date isn't a real one", "Error",
+  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private bool DateTextBoxValidateAndAddDate()
+        {
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                errorProvider1.SetError(textBox2, "Please enter a date");
+                return false;
+            }
+            else
+            {
+                string date = textBox2.Text.ToLower();
+                string[] dates = date.Split(".");
+                if (dates.Length != 3)
+                {
+                    errorProvider1.SetError(textBox2, "Please use the format day.month.year");
+                    return false;
+                }
+                bool[] isnotnull = { dates[0] != "none", dates[1] != "none", dates[2] != "none" };
+
+                if (isnotnull[0])
+                {
+                    result.Day = Convert.ToInt32(dates[0]);
+                }
+                if (isnotnull[1])
+                {
+                    result.Month = Convert.ToInt32(dates[1]);
+                }
+                if (isnotnull[2])
+                {
+                    result.Year = Convert.ToInt32(dates[2]);
+                }
+                if (isnotnull.Contains(true) || !DateUtils.Is_Valid_Date_Bool((int)result.Day, (int)result.Month, (int)result.Year))
+                {
+                    errorProvider1.SetError(textBox2, "That isnt a valid date");
+                    return false;
+                }
+            }
+            errorProvider1.SetError(textBox2, "");
+            return true;
+        }
+
+        private void textBox2_Validating(object sender, CancelEventArgs e)
+        {
+            DateTextBoxValidateAndAddDate();
         }
     }
 

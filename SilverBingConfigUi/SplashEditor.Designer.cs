@@ -119,7 +119,7 @@ namespace SilverBingConfigUi
             this.groupBox5.Size = new System.Drawing.Size(437, 125);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Help";
+            this.groupBox5.Text = "Preview";
             // 
             // richTextBox3
             // 
