@@ -17,11 +17,26 @@ namespace SilverBingConfigUi
             InitializeComponent();
         }
 
-        public Status result;
+        public SplashEditor(Status status)
+        {
+            InitializeComponent();
+            comboBox1.SelectedIndex = status.ActivityType;
+            textBox1.Text = status.Name;
+            textBox2.Enabled = comboBox1.SelectedIndex == 1;
+            textBox2.Text = status.StreamUrl;
+        }
+
+        public Status result = new Status();
         private static readonly string[] games = { "Fortnite", "Minecraft", "Doki Doki literature club" };
         private static readonly string[] music = { "Up b down b", "Pumped up kicks", "Want you gone" };
         private static readonly string[] streamnames = { "Twitch plays minecraft", "EpicSMP day 1", "Scambaiting episode 69", "Coding SilverBing" };
 
+        //Playing
+        //Streaming
+        //Listening to
+        //Watching
+        //Custom
+        //Competing
         private void SplashEditor_Load(object sender, EventArgs e)
         {
             richTextBox1.AppendText("Choose the status prefix For example:");
@@ -64,6 +79,9 @@ namespace SilverBingConfigUi
                         break;
                 }
             }
+
+            textBox2.Enabled = comboBox1.SelectedIndex == 1;
+
             richTextBox3.Clear();
             richTextBox3.SelectionFont = new Font(richTextBox3.Font, FontStyle.Bold);
             richTextBox3.AppendText($"{comboBox1.SelectedItem} ");
@@ -71,15 +89,16 @@ namespace SilverBingConfigUi
             richTextBox3.AppendText(textBox1.Text);
         }
 
-        //Playing
-        //Streaming
-        //Listening to
-        //Watching
-        //Custom
-        //Competing
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
+            result.Name = textBox1.Text;
+            result.ActivityType = comboBox1.SelectedIndex == -1 ? 0 : comboBox1.SelectedIndex;
+            if (comboBox1.SelectedIndex == 1)
+            {
+                result.StreamUrl = textBox2.Text;
+            }
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

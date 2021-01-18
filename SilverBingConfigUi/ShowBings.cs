@@ -21,32 +21,29 @@ namespace SilverBingConfigUi
         private List<Bingtext> bingtexts;
         private string filePath = string.Empty;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            using OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                openFileDialog.Filter = "JSON files (BINGSYEAH.json)|*.json";
-                openFileDialog.RestoreDirectory = true;
+                Filter = "JSON files (BINGSYEAH.json)|*.json",
+                RestoreDirectory = true
+            };
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //Get the path of specified file
+                filePath = openFileDialog.FileName;
+                using StreamReader reader = new StreamReader(filePath);
+                bingtexts = JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
+                for (int i = bingtexts.Count - 1; i >= 0; i--)
                 {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-                    using (StreamReader reader = new StreamReader(filePath))
-                    {
-                        bingtexts = JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
-                        for (int i = 0; i < bingtexts.Count; i++)
-
-                        {
-                            listView1.Items.Add(i.ToString());
-                        }
-                        listView1.Items.Add("+");
-                    }
+                    listView1.Items.Add(i.ToString());
                 }
+                listView1.Items.Add("+");
             }
         }
 
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ListView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -76,7 +73,7 @@ namespace SilverBingConfigUi
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(filePath) || bingtexts == null)
             {
@@ -84,13 +81,33 @@ namespace SilverBingConfigUi
     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using StreamWriter writer = new StreamWriter(filePath);
+            var options = new JsonSerializerOptions
             {
-                var options = new JsonSerializerOptions
+                WriteIndented = true
+            };
+            writer.Write(JsonSerializer.Serialize(bingtexts.ToArray(), options));
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (listView1.SelectedItems[0].Text != "+")
                 {
-                    WriteIndented = true
-                };
-                writer.Write(JsonSerializer.Serialize(bingtexts.ToArray(), options));
+                    bingtexts.RemoveAt(listView1.SelectedItems[0].Index);
+                    listView1.Items.Clear();
+                    for (int i = 0; i < bingtexts.Count; i++)
+                    {
+                        listView1.Items.Add(i.ToString());
+                    }
+                    listView1.Items.Add("+");
+                }
+            }
+            else
+            {
+                ConnectOne hahafunni = new ConnectOne();
+                hahafunni.Show();
             }
         }
     }

@@ -63,9 +63,69 @@ namespace SilverBingConfigUi.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _13c8662cff8e029799a35878b56e23eb {
+            get {
+                object obj = ResourceManager.GetObject("13c8662cff8e029799a35878b56e23eb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _435f9f150f67f68ca9e254d80a38f33c {
             get {
                 object obj = ResourceManager.GetObject("435f9f150f67f68ca9e254d80a38f33c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _8becd37ab9d13cdfe37c08c496a9def3 {
+            get {
+                object obj = ResourceManager.GetObject("8becd37ab9d13cdfe37c08c496a9def3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap a3c {
+            get {
+                object obj = ResourceManager.GetObject("a3c", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap df7ba0f4020ca70048a0226d1dfa73f6 {
+            get {
+                object obj = ResourceManager.GetObject("df7ba0f4020ca70048a0226d1dfa73f6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap e {
+            get {
+                object obj = ResourceManager.GetObject("e", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap e1ec53c5d89c0291001989a36716aa9a {
+            get {
+                object obj = ResourceManager.GetObject("e1ec53c5d89c0291001989a36716aa9a", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

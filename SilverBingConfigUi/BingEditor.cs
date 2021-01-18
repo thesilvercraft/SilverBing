@@ -29,11 +29,11 @@ namespace SilverBingConfigUi
             textBox2.Text = $"{(text.Day == null ? "none" : text.Day)}.{(text.Month == null ? "none" : text.Month)}.{(text.Year == null ? "none" : text.Year)}";
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void SplitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
         }
 
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        private void SplitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
         }
 
@@ -45,7 +45,7 @@ namespace SilverBingConfigUi
         private static readonly string[] nicknames = { "SilverDimond", "Wbbubler", "Bong God" };
         public Bingtext result = new Bingtext();
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             RandomGenerator rng = new RandomGenerator();
             int random_person = rng.Next(0, usernames.Length);
@@ -62,11 +62,11 @@ namespace SilverBingConfigUi
             }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void TextBox2_TextChanged(object sender, EventArgs e)
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             result = new Bingtext
             {
@@ -88,34 +88,19 @@ namespace SilverBingConfigUi
             {
                 result.Day_of_week = comboBox4.SelectedIndex - 1;
             }
-            string date = textBox2.Text.ToLower();
-            string[] dates = date.Split(".");
-            bool[] isnotnull = { dates[0] != "none", dates[1] != "none", dates[2] != "none" };
-            if (isnotnull[0])
-            {
-                result.Day = Convert.ToInt32(dates[0]);
-            }
-            if (isnotnull[1])
-            {
-                result.Month = Convert.ToInt32(dates[1]);
-            }
-            if (isnotnull[2])
-            {
-                result.Year = Convert.ToInt32(dates[2]);
-            }
-            if (isnotnull.Contains(false) || DateUtils.Is_Valid_Date_Bool((int)result.Day, (int)result.Month, (int)result.Year))
+            if (DateTextBoxValidateAndAddDate())
             {
                 DialogResult = DialogResult.OK;
                 Close();
             }
             else
             {
-                MessageBox.Show("Date isn't a real one", "Error",
+                MessageBox.Show("Date isn't a real one you doofus", "Error",
   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 
@@ -149,7 +134,7 @@ namespace SilverBingConfigUi
                 {
                     result.Year = Convert.ToInt32(dates[2]);
                 }
-                if (isnotnull.Contains(true) || !DateUtils.Is_Valid_Date_Bool((int)result.Day, (int)result.Month, (int)result.Year))
+                if (!isnotnull.Contains(false) && !DateUtils.Is_Valid_Date_Bool((int)result.Day, (int)result.Month, (int)result.Year))
                 {
                     errorProvider1.SetError(textBox2, "That isnt a valid date");
                     return false;
@@ -159,7 +144,7 @@ namespace SilverBingConfigUi
             return true;
         }
 
-        private void textBox2_Validating(object sender, CancelEventArgs e)
+        private void TextBox2_Validating(object sender, CancelEventArgs e)
         {
             DateTextBoxValidateAndAddDate();
         }

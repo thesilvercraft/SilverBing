@@ -121,4 +121,22 @@
   <data name="435f9f150f67f68ca9e254d80a38f33c" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\435f9f150f67f68ca9e254d80a38f33c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="e" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\e.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="e1ec53c5d89c0291001989a36716aa9a" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\e1ec53c5d89c0291001989a36716aa9a.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="13c8662cff8e029799a35878b56e23eb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\13c8662cff8e029799a35878b56e23eb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="a3c" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\a3c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="8becd37ab9d13cdfe37c08c496a9def3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\8becd37ab9d13cdfe37c08c496a9def3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="df7ba0f4020ca70048a0226d1dfa73f6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\df7ba0f4020ca70048a0226d1dfa73f6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

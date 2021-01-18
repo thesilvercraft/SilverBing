@@ -34,6 +34,7 @@ namespace SilverBingConfigUi
             this.listView1 = new System.Windows.Forms.ListView();
             this.button2 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -42,13 +43,14 @@ namespace SilverBingConfigUi
             // 
             // button1
             // 
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 44);
+            this.button1.Size = new System.Drawing.Size(52, 44);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Load file";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // listView1
             // 
@@ -59,17 +61,17 @@ namespace SilverBingConfigUi
             this.listView1.Size = new System.Drawing.Size(666, 306);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // button2
             // 
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(84, 3);
+            this.button2.Location = new System.Drawing.Point(61, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 47);
+            this.button2.Size = new System.Drawing.Size(52, 44);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Save";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // splitContainer1
             // 
@@ -82,6 +84,7 @@ namespace SilverBingConfigUi
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.button3);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
             // 
@@ -90,6 +93,15 @@ namespace SilverBingConfigUi
             this.splitContainer1.Panel2.Controls.Add(this.listView1);
             this.splitContainer1.Size = new System.Drawing.Size(666, 360);
             this.splitContainer1.TabIndex = 6;
+            // 
+            // button3
+            // 
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(119, 4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(52, 44);
+            this.button3.TabIndex = 5;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // ShowSpashes
             // 
@@ -113,5 +125,6 @@ namespace SilverBingConfigUi
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button button3;
     }
 }

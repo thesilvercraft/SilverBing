@@ -253,7 +253,7 @@ namespace SilverBingConfigUi
             this.textBox1.Size = new System.Drawing.Size(498, 23);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "{0} reacted to the Microsoft bing first.";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // groupBox5
             // 
@@ -336,8 +336,8 @@ namespace SilverBingConfigUi
             this.textBox2.Size = new System.Drawing.Size(153, 23);
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "none.none.none";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.textBox2.Validating += new System.ComponentModel.CancelEventHandler(this.textBox2_Validating);
+            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
+            this.textBox2.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox2_Validating);
             // 
             // groupBox8
             // 
@@ -367,7 +367,7 @@ namespace SilverBingConfigUi
             this.button1.TabIndex = 8;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // groupBox9
             // 
@@ -397,7 +397,7 @@ namespace SilverBingConfigUi
             this.comboBox4.Size = new System.Drawing.Size(141, 28);
             this.comboBox4.TabIndex = 0;
             this.comboBox4.Text = "None";
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.ComboBox4_SelectedIndexChanged);
             // 
             // errorProvider1
             // 
