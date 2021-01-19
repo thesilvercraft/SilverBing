@@ -54,7 +54,9 @@ namespace SilverBingConfigUi
             // 
             // listView1
             // 
+            this.listView1.BackColor = System.Drawing.Color.Black;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
@@ -108,8 +110,10 @@ namespace SilverBingConfigUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(666, 360);
             this.Controls.Add(this.splitContainer1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "ShowBings";
             this.Text = "ShowBings";
             this.splitContainer1.Panel1.ResumeLayout(false);
