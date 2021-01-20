@@ -10,7 +10,7 @@ namespace SilverBotDsharp.Modules.infoclasses
     public class Config
     {
         public string Prefix { get; set; } = "sb!";
-        public string Token { get; set; } = "UR TOKEN HERE";
+        public string Token { get; set; } = "Your discord bot TOKEN HERE";
         public string Invite { get; set; } = "https://discord.com/api/oauth2/authorize?client_id={0}&permissions=2147483639&scope=bot";
         public timespan Timespan { get; set; } = new timespan();
 
