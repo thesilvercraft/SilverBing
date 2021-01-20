@@ -30,6 +30,7 @@ namespace SilverBingConfigUi
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BingEditor));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -189,6 +190,7 @@ namespace SilverBingConfigUi
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(28, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 60);
@@ -201,6 +203,7 @@ namespace SilverBingConfigUi
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(28, 142);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(515, 207);
@@ -211,6 +214,7 @@ namespace SilverBingConfigUi
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
             this.groupBox4.Location = new System.Drawing.Point(6, 113);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(498, 81);
@@ -230,6 +234,7 @@ namespace SilverBingConfigUi
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.prevtext);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(6, 51);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(498, 56);
@@ -259,6 +264,7 @@ namespace SilverBingConfigUi
             // 
             this.groupBox5.Controls.Add(this.groupBox6);
             this.groupBox5.Controls.Add(this.numericUpDown1);
+            this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(199, 13);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(156, 126);
@@ -269,6 +275,7 @@ namespace SilverBingConfigUi
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.ForeColor = System.Drawing.Color.White;
             this.groupBox6.Location = new System.Drawing.Point(15, 49);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(129, 67);
@@ -322,6 +329,7 @@ namespace SilverBingConfigUi
             // 
             this.groupBox7.Controls.Add(this.textBox2);
             this.groupBox7.Controls.Add(this.groupBox8);
+            this.groupBox7.ForeColor = System.Drawing.Color.White;
             this.groupBox7.Location = new System.Drawing.Point(361, 13);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(182, 126);
@@ -343,6 +351,7 @@ namespace SilverBingConfigUi
             // 
             this.groupBox8.Controls.Add(this.label5);
             this.groupBox8.Controls.Add(this.label4);
+            this.groupBox8.ForeColor = System.Drawing.Color.White;
             this.groupBox8.Location = new System.Drawing.Point(12, 49);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(153, 67);
@@ -361,17 +370,19 @@ namespace SilverBingConfigUi
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(468, 361);
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(485, 355);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(58, 53);
             this.button1.TabIndex = 8;
-            this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.comboBox4);
+            this.groupBox9.ForeColor = System.Drawing.Color.White;
             this.groupBox9.Location = new System.Drawing.Point(28, 79);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(165, 60);
@@ -407,13 +418,15 @@ namespace SilverBingConfigUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 396);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(565, 433);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "BingEditor";
             this.Text = "BingEditor";
             this.groupBox1.ResumeLayout(false);

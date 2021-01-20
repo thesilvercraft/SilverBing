@@ -54,13 +54,16 @@ namespace SilverBingConfigUi
             // 
             // listView1
             // 
+            this.listView1.BackColor = System.Drawing.Color.Black;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.ForeColor = System.Drawing.Color.White;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(666, 306);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // button2
@@ -102,13 +105,16 @@ namespace SilverBingConfigUi
             this.button3.Size = new System.Drawing.Size(52, 44);
             this.button3.TabIndex = 5;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // ShowSpashes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(666, 360);
             this.Controls.Add(this.splitContainer1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "ShowSpashes";
             this.Text = "ShowSpashes";
             this.splitContainer1.Panel1.ResumeLayout(false);

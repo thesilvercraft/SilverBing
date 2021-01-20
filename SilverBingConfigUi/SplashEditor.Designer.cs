@@ -40,8 +40,8 @@ namespace SilverBingConfigUi
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -54,6 +54,7 @@ namespace SilverBingConfigUi
             // 
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(261, 218);
@@ -82,6 +83,7 @@ namespace SilverBingConfigUi
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.richTextBox1);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(6, 57);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(249, 155);
@@ -103,6 +105,7 @@ namespace SilverBingConfigUi
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(279, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(434, 72);
@@ -120,7 +123,9 @@ namespace SilverBingConfigUi
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.Color.Black;
             this.groupBox5.Controls.Add(this.richTextBox3);
+            this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(279, 88);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(434, 142);
@@ -152,12 +157,24 @@ namespace SilverBingConfigUi
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.groupBox6);
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
             this.groupBox4.Location = new System.Drawing.Point(12, 236);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(701, 84);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Stream Specific";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textBox2);
+            this.groupBox6.ForeColor = System.Drawing.Color.White;
+            this.groupBox6.Location = new System.Drawing.Point(9, 22);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(686, 56);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Url";
             // 
             // textBox2
             // 
@@ -170,26 +187,18 @@ namespace SilverBingConfigUi
             this.textBox2.Text = "https:\\\\twitch.tv\\silverdimond";
             this.textBox2.TextChanged += new System.EventHandler(this.UpdatePreview);
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.textBox2);
-            this.groupBox6.Location = new System.Drawing.Point(9, 22);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(686, 56);
-            this.groupBox6.TabIndex = 2;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Url";
-            // 
             // SplashEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(772, 332);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Name = "SplashEditor";
             this.Text = "SplashEditor";
             this.Load += new System.EventHandler(this.SplashEditor_Load);

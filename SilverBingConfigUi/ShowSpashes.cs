@@ -46,9 +46,73 @@ namespace SilverBingConfigUi
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(filePath) || activities == null)
+            {
+                MessageBox.Show("fucking dumbass why did you click it when there isn't even a file opened -Marcel D 2021", "Error",
+    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            using StreamWriter writer = new StreamWriter(filePath);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            writer.Write(JsonSerializer.Serialize(activities.ToArray(), options));
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (listView1.SelectedItems.Count == 1)
+                {
+                    if (listView1.SelectedItems[0].Text == "+")
+                    {
+                        //create new bing??
+                        var editsplash = new SplashEditor();
+                        if (editsplash.ShowDialog() == DialogResult.OK)
+                        {
+                            activities.Add(editsplash.result);
+                            listView1.Items[activities.Count - 1].Text = (activities.Count - 1).ToString();
+                            listView1.Items.Add("+");
+                        }
+                    }
+                    else
+                    {
+                        //bruh moment
+                        var editsplash = new SplashEditor(activities[listView1.SelectedItems[0].Index]);
+                        if (editsplash.ShowDialog() == DialogResult.OK)
+                        {
+                            activities[Convert.ToInt32(listView1.SelectedItems[0].Text)] = editsplash.result;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                if (listView1.SelectedItems[0].Text != "+")
+                {
+                    activities.RemoveAt(listView1.SelectedItems[0].Index);
+                    listView1.Items.Clear();
+                    for (int i = 0; i < activities.Count; i++)
+                    {
+                        listView1.Items.Add(i.ToString());
+                    }
+                    listView1.Items.Add("+");
+                }
+            }
+            else
+            {
+                ConnectOne hahafunni = new ConnectOne();
+                hahafunni.Show();
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
     }
