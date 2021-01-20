@@ -73,7 +73,7 @@ namespace SilverBingConfigUi
                         if (editsplash.ShowDialog() == DialogResult.OK)
                         {
                             activities.Add(editsplash.result);
-                            listView1.Items[activities.Count - 1].Text = (activities.Count - 1).ToString();
+                            listView1.Items[activities.Count - 1].Text = editsplash.result.Name;
                             listView1.Items.Add("+");
                         }
                     }
