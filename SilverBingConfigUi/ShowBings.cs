@@ -35,7 +35,7 @@ namespace SilverBingConfigUi
                 filePath = openFileDialog.FileName;
                 using StreamReader reader = new StreamReader(filePath);
                 bingtexts = JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
-                for (int i = bingtexts.Count - 1; i >= 0; i--)
+                for (int i = 0; i < bingtexts.Count; i++)
                 {
                     listView1.Items.Add(i.ToString());
                 }

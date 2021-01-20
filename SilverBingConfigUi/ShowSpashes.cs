@@ -83,7 +83,8 @@ namespace SilverBingConfigUi
                         var editsplash = new SplashEditor(activities[listView1.SelectedItems[0].Index]);
                         if (editsplash.ShowDialog() == DialogResult.OK)
                         {
-                            activities[Convert.ToInt32(listView1.SelectedItems[0].Text)] = editsplash.result;
+                            activities[listView1.SelectedItems[0].Index] = editsplash.result;
+                            listView1.Items[listView1.SelectedItems[0].Index].Text = editsplash.result.Name;
                         }
                     }
                 }
