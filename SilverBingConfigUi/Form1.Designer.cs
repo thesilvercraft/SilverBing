@@ -34,7 +34,6 @@ namespace SilverBingConfigUi
             this.ChangeConfigButton = new System.Windows.Forms.Button();
             this.ChangeBingTextsButton = new System.Windows.Forms.Button();
             this.ChangeStatusButton = new System.Windows.Forms.Button();
-            this.ExitButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -64,7 +63,7 @@ namespace SilverBingConfigUi
             this.ChangeConfigButton.Name = "ChangeConfigButton";
             this.ChangeConfigButton.Size = new System.Drawing.Size(120, 53);
             this.ChangeConfigButton.TabIndex = 3;
-            this.ChangeConfigButton.Text = "Change config";
+            this.ChangeConfigButton.Text = "Change Config";
             this.ChangeConfigButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ChangeConfigButton.UseVisualStyleBackColor = false;
             this.ChangeConfigButton.Click += new System.EventHandler(this.ChangeConfigButton_Click);
@@ -102,17 +101,6 @@ namespace SilverBingConfigUi
             this.ChangeStatusButton.UseVisualStyleBackColor = false;
             this.ChangeStatusButton.Click += new System.EventHandler(this.ChangeStatusButton_Click);
             // 
-            // ExitButton
-            // 
-            this.ExitButton.BackColor = System.Drawing.Color.Transparent;
-            this.ExitButton.Image = ((System.Drawing.Image)(resources.GetObject("ExitButton.Image")));
-            this.ExitButton.Location = new System.Drawing.Point(410, 3);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(51, 46);
-            this.ExitButton.TabIndex = 4;
-            this.ExitButton.UseVisualStyleBackColor = false;
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -128,9 +116,8 @@ namespace SilverBingConfigUi
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(462, 162);
+            this.ClientSize = new System.Drawing.Size(397, 134);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.ChangeStatusButton);
             this.Controls.Add(this.ChangeBingTextsButton);
             this.Controls.Add(this.ChangeConfigButton);
@@ -154,7 +141,6 @@ namespace SilverBingConfigUi
         private System.Windows.Forms.Button ChangeConfigButton;
         private System.Windows.Forms.Button ChangeBingTextsButton;
         private System.Windows.Forms.Button ChangeStatusButton;
-        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

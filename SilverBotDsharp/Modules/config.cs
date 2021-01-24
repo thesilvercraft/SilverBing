@@ -18,6 +18,7 @@ namespace SilverBotDsharp.Modules.infoclasses
 "<:micorsoft_bing_0_1:779071679019876393><:micorsoft_bing_1_1:779071679862538313><:micorsoft_bing_2_1:779071679879446628><:micorsoft_bing_3_1:779071679870795847><:micorsoft_bing_4_1:779071680114196480><:micorsoft_bing_5_1:779071680064258079><:micorsoft_bing_6_1:779071680277774336><:micorsoft_bing_7_1:779071680151683083>";
 
         public string Emote { get; set; } = ":MICROSOFT:";
+        public int MsDelay { get; set; } = 1800000;
 
         public static TimeSpan timeSpan(timespan timespan)
         {
