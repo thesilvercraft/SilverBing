@@ -63,7 +63,6 @@ namespace SilverBotDsharp
             {
                 await discord.UpdateStatusAsync(Splashes.GetSingle());
                 await Task.Delay(config.MsDelay);
-                await Task.Delay(config.MsDelay);
             }
         }
     }
