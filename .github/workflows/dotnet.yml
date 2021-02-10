@@ -54,3 +54,13 @@ jobs:
          asset_path: ./silverbing.zip
          asset_name: silverbing.zip
          asset_content_type: application/zip
+    - name: Upload Ui Release Asset
+      id: upload-ui-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+         upload_url: ${{ steps.create_release.outputs.upload_url }}
+         asset_path: ./SilverBingConfigUi.zip
+         asset_name: SilverBingConfigUi.zip
+         asset_content_type: application/zip
