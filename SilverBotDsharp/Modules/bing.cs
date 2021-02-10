@@ -303,7 +303,7 @@ namespace SilverBotDsharp.Modules
             for (int a = 0; a < pages.Count; a++)
             {
                 var embedbuilder = new DiscordEmbedBuilder(pages[a].Embed);
-                embedbuilder.WithAuthor("page " + (a + 1) + " out of " + (pages.Count + 1));
+                embedbuilder.WithAuthor("page " + (a + 1) + "/" + pages.Count);
                 pages[a].Embed = embedbuilder.Build();
             }
             await interactivity.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages);
