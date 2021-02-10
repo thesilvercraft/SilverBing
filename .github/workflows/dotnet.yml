@@ -30,10 +30,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-         tag_name: ${{ github.ref }}
-         release_name: Release ${{ github.ref }}
-         body: |
-            Automated Release by GitHub Action CI  
+         tag_name: ${{ github.sha }}
+         release_name: ${{ github.sha }}
+         body: Automated Release by GitHub Action CI. For the ${{ github.event }} event.
          draft: false
          prerelease: true
     - name: Upload Release Asset
