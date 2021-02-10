@@ -24,6 +24,9 @@ jobs:
     - name: Zip 
       shell: powershell
       run: Compress-7Zip "SilverBotDsharp\bin\Release\net5.0" -ArchiveFileName "silverbing.zip" -Format Zip
+    - name: Zip Ui 
+      shell: powershell
+      run: Compress-7Zip "SilverBingConfigUi\bin\Release\net5.0" -ArchiveFileName "SilverBingConfigUi.zip" -Format Zip
     - name: Make a random name
       id: E
       shell: powershell
@@ -38,8 +41,8 @@ jobs:
       with:
          tag_name: ${{ steps.E.outputs.Random }}
          release_name: ${{ steps.E.outputs.Random }}
-         body: Automated Release by GitHub Action CI. For the ${{ github.event }} event.
-         draft: false
+         body: Automated Release. For ${{ github.sha}} .
+         draft: true
          prerelease: true
     - name: Upload Release Asset
       id: upload-release-asset
