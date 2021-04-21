@@ -134,6 +134,7 @@ namespace SilverBotDsharp.Modules
                 if (thing != null)
                 {
                     col.Delete(thing.ChannelId);
+                    Channels.RemoveAll(x => x.Id == thing.ChannelId);
                     await ctx.RespondAsync($"well we deleted {shit.Id}");
                 }
             }
