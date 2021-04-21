@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SilverBingConfigUi
+﻿namespace SilverBingConfigUi
 {
-    internal class NumberUtils
+    internal static class NumberUtils
     {
         public static string NumberToText(int n)
         {

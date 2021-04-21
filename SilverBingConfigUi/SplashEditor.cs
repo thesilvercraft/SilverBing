@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SilverBingConfigUi
@@ -26,8 +20,8 @@ namespace SilverBingConfigUi
             textBox2.Text = status.StreamUrl;
         }
 
-        public Status result = new Status();
-        private static readonly string[] games = { "Fortnite", "Minecraft", "Doki Doki literature club" };
+        public Status result = new();
+        private static readonly string[] games = { "Fartnite", "Minecraft", "Doki Doki literature club" };
         private static readonly string[] music = { "Up b down b", "Pumped up kicks", "Want you gone" };
         private static readonly string[] streamnames = { "Twitch plays minecraft", "EpicSMP day 1", "Scambaiting episode 69", "Coding SilverBing" };
 
@@ -39,11 +33,14 @@ namespace SilverBingConfigUi
         //Competing
         private void SplashEditor_Load(object sender, EventArgs e)
         {
-            richTextBox1.AppendText("Choose the status prefix For example:");
-            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
-            richTextBox1.AppendText("Playing ");
-            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Regular);
-            richTextBox1.AppendText("Minecraft");
+            if (richTextBox1.TextLength == 0)
+            {
+                richTextBox1.AppendText("Choose the status prefix, For example:");
+                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
+                richTextBox1.AppendText("Playing ");
+                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Regular);
+                richTextBox1.AppendText("Minecraft");
+            }
         }
 
         private void UpdatePreview(object sender, EventArgs e)
@@ -51,7 +48,7 @@ namespace SilverBingConfigUi
             if (sender.GetType() == comboBox1.GetType())
             {
                 richTextBox1.Clear();
-                richTextBox1.AppendText("Choose the status prefix For example:");
+                richTextBox1.AppendText("Choose the status prefix, For example:");
                 richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
                 richTextBox1.AppendText($"{comboBox1.SelectedItem} ");
                 richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Regular);

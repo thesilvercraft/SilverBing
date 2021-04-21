@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SilverBingConfigUi
@@ -20,11 +15,11 @@ namespace SilverBingConfigUi
         }
 
         private string filePath;
-        private List<Status> activities = new List<Status>();
+        private List<Status> activities = new();
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog openFileDialog = new OpenFileDialog
+            using OpenFileDialog openFileDialog = new()
             {
                 Filter = "JSON files (splashes.json)|*.json",
                 RestoreDirectory = true
@@ -34,7 +29,7 @@ namespace SilverBingConfigUi
             {
                 //Get the path of specified file
                 filePath = openFileDialog.FileName;
-                using StreamReader reader = new StreamReader(filePath);
+                using StreamReader reader = new(filePath);
                 activities = JsonSerializer.Deserialize<Status[]>(reader.ReadToEnd()).ToList();
                 for (int i = 0; i < activities.Count; i++)
                 {
@@ -52,7 +47,7 @@ namespace SilverBingConfigUi
     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            using StreamWriter writer = new StreamWriter(filePath);
+            using StreamWriter writer = new(filePath);
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
@@ -62,30 +57,27 @@ namespace SilverBingConfigUi
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && listView1.SelectedItems.Count == 1)
             {
-                if (listView1.SelectedItems.Count == 1)
+                if (listView1.SelectedItems[0].Text == "+")
                 {
-                    if (listView1.SelectedItems[0].Text == "+")
+                    //create new bing??
+                    var editsplash = new SplashEditor();
+                    if (editsplash.ShowDialog() == DialogResult.OK)
                     {
-                        //create new bing??
-                        var editsplash = new SplashEditor();
-                        if (editsplash.ShowDialog() == DialogResult.OK)
-                        {
-                            activities.Add(editsplash.result);
-                            listView1.Items[activities.Count - 1].Text = editsplash.result.Name;
-                            listView1.Items.Add("+");
-                        }
+                        activities.Add(editsplash.result);
+                        listView1.Items[activities.Count - 1].Text = editsplash.result.Name;
+                        listView1.Items.Add("+");
                     }
-                    else
+                }
+                else
+                {
+                    //bruh moment
+                    var editsplash = new SplashEditor(activities[listView1.SelectedItems[0].Index]);
+                    if (editsplash.ShowDialog() == DialogResult.OK)
                     {
-                        //bruh moment
-                        var editsplash = new SplashEditor(activities[listView1.SelectedItems[0].Index]);
-                        if (editsplash.ShowDialog() == DialogResult.OK)
-                        {
-                            activities[listView1.SelectedItems[0].Index] = editsplash.result;
-                            listView1.Items[listView1.SelectedItems[0].Index].Text = editsplash.result.Name;
-                        }
+                        activities[listView1.SelectedItems[0].Index] = editsplash.result;
+                        listView1.Items[listView1.SelectedItems[0].Index].Text = editsplash.result.Name;
                     }
                 }
             }
@@ -108,13 +100,9 @@ namespace SilverBingConfigUi
             }
             else
             {
-                ConnectOne hahafunni = new ConnectOne();
+                ConnectOne hahafunni = new();
                 hahafunni.Show();
             }
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
     }
 }

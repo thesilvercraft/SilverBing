@@ -17,7 +17,7 @@ namespace SilverBotDsharp.Modules
         {
             if (minValue >= maxExclusiveValue)
             {
-                ArgumentOutOfRangeException argumentOutOfRangeException = new ArgumentOutOfRangeException(nameof(minValue), "minValue must be lower than maxExclusiveValue");
+                ArgumentOutOfRangeException argumentOutOfRangeException = new(nameof(minValue), "minValue must be lower than maxExclusiveValue");
                 throw argumentOutOfRangeException;
             }
 

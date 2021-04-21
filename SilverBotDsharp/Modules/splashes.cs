@@ -1,15 +1,10 @@
 ﻿using DSharpPlus.Entities;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SilverBotDsharp.Modules
 {
-    internal class Splashes
+    internal static class Splashes
     {
         private static DiscordActivity[] Internal { get; } = {
         new ("Bingers", ActivityType.Watching),

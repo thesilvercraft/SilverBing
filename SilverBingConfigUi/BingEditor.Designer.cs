@@ -344,7 +344,7 @@ namespace SilverBingConfigUi
             this.textBox2.Size = new System.Drawing.Size(153, 23);
             this.textBox2.TabIndex = 10;
             this.textBox2.Text = "none.none.none";
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2_TextChanged);
+            
             this.textBox2.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox2_Validating);
             // 
             // groupBox8
@@ -408,7 +408,7 @@ namespace SilverBingConfigUi
             this.comboBox4.Size = new System.Drawing.Size(141, 28);
             this.comboBox4.TabIndex = 0;
             this.comboBox4.Text = "None";
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.ComboBox4_SelectedIndexChanged);
+         
             // 
             // errorProvider1
             // 

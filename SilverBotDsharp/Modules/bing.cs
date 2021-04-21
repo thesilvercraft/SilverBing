@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
+using DSharpPlus.Exceptions;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Extensions;
+using LiteDB;
+using SilverBotDsharp.Modules.infoclasses;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
-using DSharpPlus.Exceptions;
-using DSharpPlus.Interactivity;
-using DSharpPlus.Interactivity.Enums;
-using DSharpPlus.Interactivity.Extensions;
-using LiteDB;
-using SilverBotDsharp.Modules.infoclasses;
 
 namespace SilverBotDsharp.Modules
 {
@@ -23,16 +21,18 @@ namespace SilverBotDsharp.Modules
     {
         public class Person
         {
-            public int Id { get; set; }
+            [BsonId]
             public ulong UserId { get; set; }
+
             public ulong ServerId { get; set; }
             public ulong Bingtimes { get; set; }
         }
 
         public class Guildthingy
         {
-            public int Id { get; set; }
+            [BsonId]
             public ulong ChannelId { get; set; }
+
             public ulong ServerId { get; set; }
         }
 
@@ -59,14 +59,12 @@ namespace SilverBotDsharp.Modules
         /// </summary>
         /// <param name="ch">the channel to send a bing to</param>
         /// <param name="cl">the client for interactivity</param>
-        private static async Task SendbingAsync([Description("the channel to send to")] DiscordChannel ch, [Description("client")] DiscordClient cl)
+        private static async Task SendbingAsync([Description("the channel to send to")] DiscordChannel ch)
         {
-            var interactivity = cl.GetInteractivity();
             var conf = Program.GetConfig();
             DiscordMessage e = await ch.SendMessageAsync(conf.Message);
-            await e.CreateReactionAsync(DiscordEmoji.FromName(cl, conf.Emote));
-
-            var react = await interactivity.WaitForReactionAsync((x => x.Emoji == DiscordEmoji.FromName(cl, conf.Emote) && x.Message == e && x.User != cl.CurrentUser), Config.timeSpan(conf.Timespan)); ;
+            await e.CreateReactionAsync(ReactionEmote);
+            var react = await interactivity.WaitForReactionAsync(x => x.Emoji == ReactionEmote && x.Message == e && !x.User.IsBot, Config.SBTimespanToTimeSpan(conf.Timespan));
             if (!react.TimedOut)
             {
                 using var db = new LiteDatabase(@"Filename=bingers.db; Connection=shared");
@@ -76,37 +74,28 @@ namespace SilverBotDsharp.Modules
                 if (thing != null)
                 {
                     thing.Bingtimes++;
-                    var list = binglist.bingtexts.Where(b => (b.day == DateTime.Today.Day || b.day == null) && (b.month == DateTime.Today.Month || b.month == null) && (b.year == DateTime.Today.Year || b.year == null) && (b.hour == DateTime.Now.Hour || b.hour == null) && (b.minute == DateTime.Now.Minute || b.minute == null) && (b.number_of_bings_of_user == thing.Bingtimes || b.number_of_bings_of_user == null) && (b.day_of_week == (int)DateTime.Today.DayOfWeek || b.day_of_week == null)).ToArray();
-                    string message = "";
+                    var list = BingList.BingTexts.Where(b => (b.day == DateTime.Today.Day || b.day == null) && (b.month == DateTime.Today.Month || b.month == null) && (b.year == DateTime.Today.Year || b.year == null) && (b.hour == DateTime.Now.Hour || b.hour == null) && (b.minute == DateTime.Now.Minute || b.minute == null) && (b.number_of_bings_of_user == thing.Bingtimes || b.number_of_bings_of_user == null) && (b.day_of_week == (int)DateTime.Today.DayOfWeek || b.day_of_week == null)).ToArray();
+                    StringBuilder message = new();
                     foreach (var o in list)
                     {
-                        message += String.Format(o.text, react.Result.User.Mention, ((DiscordMember)react.Result.User).Nickname) + Environment.NewLine;
+                        message.Append($"{string.Format(o.text, react.Result.User.Mention, ((DiscordMember)react.Result.User).Nickname)}{Environment.NewLine}");
                     }
-                    await ch.SendMessageAsync(message);
+                    await ch.SendMessageAsync(message.ToString());
                     if (react.Result.User.Id == 687387957296103541 && DateTime.Today.Day == 8 && DateTime.Today.Month == 3)
                     {
-                        await ch.SendMessageAsync(react.Result.User.Mention + " happy birthday Wbbubler https://cdn.discordapp.com/attachments/728360861483401240/781827459867344916/cooltext369813039532598.png");
+                        await ch.SendMessageAsync($"{react.Result.User.Mention} happy birthday Wbbubler https://cdn.discordapp.com/attachments/728360861483401240/781827459867344916/cooltext369813039532598.png");
                     }
-
-                    try
-                    {
-                        col.Update(thing);
-                    }
-                    catch
-                    {
-                        throw;
-                    }
+                    col.Update(thing);
                 }
                 else
                 {
-                    Person person = new Person
+                    col.Insert(new Person
                     {
                         Bingtimes = 1,
                         ServerId = ch.Guild.Id,
                         UserId = react.Result.User.Id
-                    };
-                    col.Insert(person);
-                    await ch.SendMessageAsync("Its the first time " + react.Result.User.Mention + " reacted to the Microsoft bing first! Everyone congratulate them and give em a pat on the back for acheving such an advancment!");
+                    });
+                    await ch.SendMessageAsync($"Its the first time {react.Result.User.Mention} reacted to the Microsoft bing first! Everyone congratulate them and give em a pat on the back for making such an advancement!");
                 }
             }
         }
@@ -114,27 +103,26 @@ namespace SilverBotDsharp.Modules
         [Command("setupbing")]
         [Description("set up sie bing boi")]
         [RequireUserPermissions(Permissions.ManageGuild)]
-        [RequireGuild()]
+        [RequireGuild]
         public async Task Setupbing(CommandContext ctx, DiscordChannel shit)
         {
             if (shit.GuildId == ctx.Guild.Id)
             {
                 using var db = new LiteDatabase(@"Filename=bingloc.db; Connection=shared");
-                var col = db.GetCollection<Guildthingy>();
-                Guildthingy guild = new Guildthingy
+                db.GetCollection<Guildthingy>().Insert(new Guildthingy
                 {
                     ChannelId = shit.Id,
                     ServerId = shit.GuildId
-                };
-                col.Insert(guild);
-                Task task = SendbingAsync(shit, cl);
+                });
+                Channels.Add(shit);
+                _ = SendbingAsync(shit);
             }
         }
 
         [Command("removebing")]
         [Description("DONT remove up sie bing boi")]
         [RequireUserPermissions(Permissions.ManageGuild)]
-        [RequireGuild()]
+        [RequireGuild]
         public async Task Removebing(CommandContext ctx, DiscordChannel shit)
         {
             if (shit.GuildId == ctx.Guild.Id)
@@ -145,34 +133,32 @@ namespace SilverBotDsharp.Modules
                 var thing = col.FindOne(x => x.ServerId == shit.GuildId && x.ChannelId == shit.Id);
                 if (thing != null)
                 {
-                    col.Delete(thing.Id);
-                    await ctx.RespondAsync("well bois we deleted " + shit.Id);
+                    col.Delete(thing.ChannelId);
+                    await ctx.RespondAsync($"well we deleted {shit.Id}");
                 }
             }
         }
 
         [Command("fakebing")]
-        [Description("makes fake bing")]
-        [RequireGuild()]
+        [Description("makes test bing")]
+        [RequireGuild]
         [RequireUserPermissions(Permissions.Administrator)]
         public async Task Fakebing(CommandContext ctx)
         {
-            cl = ctx.Client;
-
             using var db = new LiteDatabase(@"Filename=bingloc.db; Connection=shared");
             var col = db.GetCollection<Guildthingy>();
             foreach (var thing in col.Find(x => x.ServerId == ctx.Guild.Id))
             {
-                Task bing = SendbingAsync(await ctx.Client.GetChannelAsync(thing.ChannelId), cl);
+                _ = SendbingAsync(await ctx.Client.GetChannelAsync(thing.ChannelId));
             }
         }
 
         [Command("bingcount")]
         [Description("tells you how many bings exist (1)")]
-        [RequireGuild()]
+        [RequireGuild]
         public async Task Bingcount(CommandContext ctx)
         {
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder bob = new();
             bob.WithTitle("There is only one bing: MICROSOFT BING");
             bob.WithDescription("But on the topic of microsoft bing you caught: none");
             using (var db = new LiteDatabase(@"Filename=bingers.db; Connection=shared"))
@@ -194,7 +180,7 @@ namespace SilverBotDsharp.Modules
         [RequireGuild()]
         public async Task Bingcount(CommandContext ctx, DiscordUser a)
         {
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder bob = new();
             bob.WithTitle("There is only one bing: MICROSOFT BING");
             bob.WithDescription($"But on the topic of microsoft bing {a.Mention} caught: none");
             using (var db = new LiteDatabase(@"Filename=bingers.db; Connection=shared"))
@@ -215,25 +201,18 @@ namespace SilverBotDsharp.Modules
 
         [Command("git")]
         [Aliases("github", "code")]
-        [Description("ehh some nerd shit")]
-        public async Task git(CommandContext ctx)
+        public async Task Git(CommandContext ctx)
         {
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
-            bob.WithTitle("thesilvercraft/SilverBing");
-            bob.WithUrl("https://github.com/thesilvercraft/SilverBing");
-            bob.WithDescription($"the bot we all love the one the only BING BOT. Contribute to thesilvercraft/SilverBing development by creating an account on GitHub.");
-            bob.WithAuthor("GitHub");
-            bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
-            await ctx.RespondAsync("<https://github.com/thesilvercraft/SilverBing>", embed: bob.Build());
+            await ctx.RespondAsync("https://github.com/thesilvercraft/SilverBing");
         }
 
         [Command("bingsreload")]
         [Description("reload the config for bings")]
-        [RequireOwner()]
-        public async Task reload(CommandContext ctx)
+        [RequireOwner]
+        public async Task Reload(CommandContext ctx)
         {
-            binglist.load_config();
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            BingList.LoadConfig();
+            DiscordEmbedBuilder bob = new();
             bob.WithTitle("Reloaded binglist for ya.");
             bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
             await ctx.RespondAsync(embed: bob.Build());
@@ -241,11 +220,11 @@ namespace SilverBotDsharp.Modules
 
         [Command("splashesreload")]
         [Description("reload the config for splashes")]
-        [RequireOwner()]
-        public async Task reloadsplashes(CommandContext ctx)
+        [RequireOwner]
+        public async Task ReloadSplashes(CommandContext ctx)
         {
             Splashes.Get(true);
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
+            DiscordEmbedBuilder bob = new();
             bob.WithTitle("Reloaded splashes for ya.");
             bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
             await ctx.RespondAsync(embed: bob.Build());
@@ -255,8 +234,8 @@ namespace SilverBotDsharp.Modules
         [Description("invite me to your server")]
         public async Task invite(CommandContext ctx)
         {
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
-            bob.WithTitle("Invite link.");
+            DiscordEmbedBuilder bob = new();
+            bob.WithTitle("Invite link:");
             bob.WithDescription(string.Format(Program.GetConfig().Invite, ctx.Client.CurrentUser.Id));
             bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
             await ctx.RespondAsync(embed: bob.Build());
@@ -264,15 +243,14 @@ namespace SilverBotDsharp.Modules
 
         [Command("leaderbing")]
         [Description("Shows you the leaderbing of this fine establishment(guild)")]
-        [RequireGuild()]
-        public async Task Leaderbing(CommandContext ctx)
+        [RequireGuild]
+        public async Task LeaderBing(CommandContext ctx)
         {
-            DiscordEmbedBuilder bob = new DiscordEmbedBuilder();
-            List<string> list = new List<string>();
-            StringBuilder stringBuilder = new StringBuilder();
-            List<Page> pages = new List<Page>();
+            DiscordEmbedBuilder bob = new();
+            StringBuilder stringBuilder = new();
+            List<Page> pages = new();
             bob.WithTitle("Microsoft bing caught in this server:");
-            bob.WithFooter("Requested by " + ctx.User.Username, ctx.User.GetAvatarUrl(ImageFormat.Png));
+            bob.WithFooter($"Requested by {ctx.User.Username}", ctx.User.GetAvatarUrl(ImageFormat.Png));
             using (var db = new LiteDatabase(@"Filename=bingers.db; Connection=shared"))
             {
                 var col = db.GetCollection<Person>();
@@ -286,63 +264,32 @@ namespace SilverBotDsharp.Modules
                         if (range.Contains(stringBuilder.Length))
                         {
                             bob.WithDescription(stringBuilder.ToString());
-
                             pages.Add(new Page(embed: bob));
                             stringBuilder.Clear();
                         }
                         else
                         {
-                            stringBuilder.Append("<@!" + person.UserId + "> reacted to the bing first " + person.Bingtimes + " times" + Environment.NewLine);
+                            stringBuilder.Append($"<@!{person.UserId}> reacted to the bing first {person.Bingtimes} times{Environment.NewLine}");
                         }
                     }
                     bob.WithDescription(stringBuilder.ToString());
                     pages.Add(new Page(embed: bob));
                 }
             }
-            var interactivity = ctx.Client.GetInteractivity();
             for (int a = 0; a < pages.Count; a++)
             {
                 var embedbuilder = new DiscordEmbedBuilder(pages[a].Embed);
-                embedbuilder.WithAuthor("page " + (a + 1) + "/" + pages.Count);
+                embedbuilder.WithAuthor("Page " + (a + 1) + "/" + pages.Count);
                 pages[a].Embed = embedbuilder.Build();
             }
             await interactivity.SendPaginatedMessageAsync(ctx.Channel, ctx.User, pages);
         }
 
-        private static Timer tim = new Timer();
-        private static DiscordClient cl;
+        private static readonly List<DiscordChannel> Channels = new();
+        private static DiscordEmoji ReactionEmote;
+        private static InteractivityExtension interactivity;
 
         public static async Task Sbing(DiscordClient e)
-        {
-            tim = new Timer();
-            var conf = Program.GetConfig();
-            tim.Interval = Config.timeSpan(conf.Timespan).TotalMilliseconds;//time in milisecounds
-            tim.Elapsed += Tim_ElapsedAsync;
-            cl = e;
-            tim.Start();
-        }
-
-        private static List<Guildthingy> todel = new List<Guildthingy>();
-
-        internal static List<Guildthingy> Todel { get => todel; set => todel = value; }
-
-        private static void Remove_bad_things()
-        {
-            using var db = new LiteDatabase(@"Filename=bingloc.db; Connection=shared");
-            var col = db.GetCollection<Guildthingy>();
-
-            foreach (var fuck in Todel.ToList())
-            {
-                Console.WriteLine("Deleting " + fuck.Id);
-                if (col.Delete(fuck.Id))
-                {
-                    Debug.Write("Deleted " + fuck.Id);
-                }
-            }
-            Todel.Clear();
-        }
-
-        private static async void Tim_ElapsedAsync(object sender, ElapsedEventArgs e)
         {
             using (var db = new LiteDatabase(@"Filename=bingloc.db; Connection=shared"))
             {
@@ -351,25 +298,20 @@ namespace SilverBotDsharp.Modules
                 var findall = col.FindAll().ToArray();
                 try
                 {
-                    Console.WriteLine("Sending bing");
+                    Console.WriteLine("Trying to find all channels");
                     foreach (var thing in findall)
                     {
                         try
                         {
-                            Console.WriteLine("Trying to find channel by id: " + thing.ChannelId);
-                            var chan = await cl.GetChannelAsync(thing.ChannelId);
-                            Console.WriteLine("Found " + chan.Name);
-                            Task bing = SendbingAsync(chan, cl);
+                            Console.WriteLine($"Trying to find channel by id: {thing.ChannelId}");
+                            var chan = await e.GetChannelAsync(thing.ChannelId);
+                            Console.WriteLine($"Found {chan.Name}");
+                            Channels.Add(chan);
                         }
                         catch (NotFoundException)
                         {
-                            Debug.WriteLine("Channnel not found :(");
-                            Todel.Add(thing);
-                        }
-                        catch (UnauthorizedException)
-                        {
-                            Debug.WriteLine("I HAS NO PERMS FUCK");
-                            Todel.Add(thing);
+                            Debug.WriteLine("Channel not found :(");
+                            Todel.Add(thing.ChannelId);
                         }
                     }
                 }
@@ -379,6 +321,64 @@ namespace SilverBotDsharp.Modules
                     throw;
                 }
             }
+            Timer tim = new();
+            var conf = Program.GetConfig();
+            ReactionEmote = DiscordEmoji.FromName(e, conf.Emote);
+            interactivity = e.GetInteractivity();
+            tim.Interval = Config.SBTimespanToTimeSpan(conf.Timespan).TotalMilliseconds;
+            tim.Elapsed += Tim_ElapsedAsync;
+            tim.Start();
+        }
+
+        internal static List<ulong> Todel { get; set; } = new();
+
+        private static void Remove_bad_things()
+        {
+            using var db = new LiteDatabase(@"Filename=bingloc.db; Connection=shared");
+            var col = db.GetCollection<Guildthingy>();
+
+            foreach (var fuck in Todel.ToList())
+            {
+                Console.WriteLine($"Deleting {fuck}");
+                if (col.Delete(fuck))
+                {
+                    Channels.RemoveAll(x => x.Id == fuck);
+                    Debug.Write($"Deleted {fuck}");
+                }
+            }
+            Todel.Clear();
+        }
+
+        private static async void Tim_ElapsedAsync(object sender, ElapsedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("Sending bing");
+                foreach (var thing in Channels)
+                {
+                    try
+                    {
+                        Console.WriteLine($"Sending bing in {thing.Name}");
+                        _ = SendbingAsync(thing);
+                    }
+                    catch (NotFoundException)
+                    {
+                        Debug.WriteLine("Channel not found :(");
+                        Todel.Add(thing.Id);
+                    }
+                    catch (UnauthorizedException)
+                    {
+                        Debug.WriteLine("I HAS NO PERMS FUCK");
+                        Todel.Add(thing.Id);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("fuck");
+                throw;
+            }
+
             Remove_bad_things();
         }
     }

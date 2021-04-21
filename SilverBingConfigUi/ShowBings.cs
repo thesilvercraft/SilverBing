@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace SilverBingConfigUi
 {
@@ -23,7 +19,7 @@ namespace SilverBingConfigUi
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog openFileDialog = new OpenFileDialog
+            using OpenFileDialog openFileDialog = new()
             {
                 Filter = "JSON files (BINGSYEAH.json)|*.json",
                 RestoreDirectory = true
@@ -33,7 +29,7 @@ namespace SilverBingConfigUi
             {
                 //Get the path of specified file
                 filePath = openFileDialog.FileName;
-                using StreamReader reader = new StreamReader(filePath);
+                using StreamReader reader = new(filePath);
                 bingtexts = JsonSerializer.Deserialize<Bingtext[]>(reader.ReadToEnd()).ToList();
                 for (int i = 0; i < bingtexts.Count; i++)
                 {
@@ -45,29 +41,26 @@ namespace SilverBingConfigUi
 
         private void ListView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && listView1.SelectedItems.Count == 1)
             {
-                if (listView1.SelectedItems.Count == 1)
+                if (listView1.SelectedItems[0].Text == "+")
                 {
-                    if (listView1.SelectedItems[0].Text == "+")
+                    //create new bing??
+                    var editbing = new BingEditor();
+                    if (editbing.ShowDialog() == DialogResult.OK)
                     {
-                        //create new bing??
-                        var editbing = new BingEditor();
-                        if (editbing.ShowDialog() == DialogResult.OK)
-                        {
-                            bingtexts.Add(editbing.result);
-                            listView1.Items[bingtexts.Count - 1].Text = (bingtexts.Count - 1).ToString();
-                            listView1.Items.Add("+");
-                        }
+                        bingtexts.Add(editbing.result);
+                        listView1.Items[bingtexts.Count - 1].Text = (bingtexts.Count - 1).ToString();
+                        listView1.Items.Add("+");
                     }
-                    else
+                }
+                else
+                {
+                    //bruh moment
+                    var editbing = new BingEditor(bingtexts[Convert.ToInt32(listView1.SelectedItems[0].Text)]);
+                    if (editbing.ShowDialog() == DialogResult.OK)
                     {
-                        //bruh moment
-                        var editbing = new BingEditor(bingtexts[Convert.ToInt32(listView1.SelectedItems[0].Text)]);
-                        if (editbing.ShowDialog() == DialogResult.OK)
-                        {
-                            bingtexts[Convert.ToInt32(listView1.SelectedItems[0].Text)] = editbing.result;
-                        }
+                        bingtexts[Convert.ToInt32(listView1.SelectedItems[0].Text)] = editbing.result;
                     }
                 }
             }
@@ -81,7 +74,7 @@ namespace SilverBingConfigUi
     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            using StreamWriter writer = new StreamWriter(filePath);
+            using StreamWriter writer = new(filePath);
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
@@ -106,7 +99,7 @@ namespace SilverBingConfigUi
             }
             else
             {
-                ConnectOne hahafunni = new ConnectOne();
+                ConnectOne hahafunni = new();
                 hahafunni.Show();
             }
         }

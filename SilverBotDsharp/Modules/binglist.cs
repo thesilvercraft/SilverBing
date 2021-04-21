@@ -1,39 +1,34 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SilverBotDsharp.Modules
 {
-    internal class binglist
+    internal static class BingList
     {
-        public static bingtext[] bingtexts { get; set; } = { new bingtext() };
+        public static BingText[] BingTexts { get; set; } = { new BingText() };
 
-        public static void load_config()
+        public static void LoadConfig()
         {
             Console.WriteLine("Loading bing texts");
             if (File.Exists("BINGSYEAH.json"))
             {
-                using StreamReader Filejosn = new StreamReader("BINGSYEAH.json");
-                bingtexts = JsonSerializer.Deserialize<bingtext[]>(Filejosn.ReadToEnd());
+                using StreamReader Filejosn = new("BINGSYEAH.json");
+                BingTexts = JsonSerializer.Deserialize<BingText[]>(Filejosn.ReadToEnd());
             }
             else
             {
-                using StreamWriter writer = new StreamWriter("BINGSYEAH.json");
+                using StreamWriter writer = new("BINGSYEAH.json");
                 var options = new JsonSerializerOptions
                 {
                     WriteIndented = true
                 };
-                writer.Write(JsonSerializer.Serialize(bingtexts, options));
+                writer.Write(JsonSerializer.Serialize(BingTexts, options));
             }
         }
     }
 
-    public class bingtext
+    public class BingText
     {
         public string text { get; set; } = "{0} reacted to the Microsoft bing first.";
         public int? day { get; set; } = null;

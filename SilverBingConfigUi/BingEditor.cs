@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Linq;
+using System.Text.Json.Serialization;
+using System.Windows.Forms;
 
 namespace SilverBingConfigUi
 {
@@ -29,25 +24,13 @@ namespace SilverBingConfigUi
             textBox2.Text = $"{(text.Day == null ? "none" : text.Day)}.{(text.Month == null ? "none" : text.Month)}.{(text.Year == null ? "none" : text.Year)}";
         }
 
-        private void SplitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void SplitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-        }
-
-        private void BingEditor_Load(object sender, EventArgs e)
-        {
-        }
-
         private static readonly string[] usernames = { "SilverDiamond", "Wbbubier", "Qwerty" };
         private static readonly string[] nicknames = { "SilverDimond", "Wbbubler", "Bong God" };
-        public Bingtext result = new Bingtext();
+        public Bingtext result = new();
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            RandomGenerator rng = new RandomGenerator();
+            RandomGenerator rng = new();
             int random_person = rng.Next(0, usernames.Length);
             try
             {
@@ -60,10 +43,6 @@ namespace SilverBingConfigUi
                     prevtext.Text = "failed to preview";
                 }
             }
-        }
-
-        private void TextBox2_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -98,10 +77,6 @@ namespace SilverBingConfigUi
                 MessageBox.Show("Date isn't a real one you doofus", "Error",
   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void ComboBox4_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private bool DateTextBoxValidateAndAddDate()

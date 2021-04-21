@@ -1,29 +1,16 @@
-﻿using SilverBotDsharp.Modules.infoclasses;
-using DSharpPlus;
+﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Interactivity.Extensions;
 using SilverBotDsharp.Modules;
+using SilverBotDsharp.Modules.infoclasses;
 using System;
 using System.Threading.Tasks;
-using System.Reflection;
-using DSharpPlus.Entities;
-using System.Diagnostics;
-using DSharpPlus.Net;
-using DSharpPlus.Lavalink;
-using DSharpPlus.Interactivity;
-using DSharpPlus.Interactivity.Extensions;
-using LiteDB;
-using Sentry;
 
 namespace SilverBotDsharp
 {
-    internal class Program
+    internal static class Program
     {
-        private static DiscordClient discord;
-        private static CommandsNextExtension commands;
-        private static Config config = new Config();
-        private static InteractivityExtension interactivity;
-
-        public static InteractivityExtension Interactivity { get => interactivity; set => interactivity = value; }
+        private static Config config = new();
 
         private static void Main()
         {
@@ -38,31 +25,30 @@ namespace SilverBotDsharp
 
         private static async Task MainAsync()
         {
-            discord = new DiscordClient(new DiscordConfiguration
+            DiscordClient discord = new(new DiscordConfiguration
             {
                 Token = config.Token,
                 TokenType = TokenType.Bot,
                 MinimumLogLevel = Microsoft.Extensions.Logging.LogLevel.Information,
             });
             string[] v = { config.Prefix };
-            commands = discord.UseCommandsNext(new CommandsNextConfiguration
+            CommandsNextExtension commands = discord.UseCommandsNext(new CommandsNextConfiguration
             {
                 EnableMentionPrefix = true,
                 StringPrefixes = v,
             });
             commands.RegisterCommands<Bing>();
             await discord.ConnectAsync();
-
-            Interactivity = discord.UseInteractivity();
+            discord.UseInteractivity();
             Console.WriteLine("Logged in as " + discord.CurrentUser.Username);
             await Task.Delay(4000);
-            binglist.load_config();
+            BingList.LoadConfig();
             await Task.Delay(4000);
             await Bing.Sbing(discord);
             while (true)
             {
                 await discord.UpdateStatusAsync(Splashes.GetSingle());
-                await Task.Delay(config.MsDelay);
+                await Task.Delay((int)Config.SBTimespanToTimeSpan(config.SplashDelay).TotalMilliseconds);
             }
         }
     }
