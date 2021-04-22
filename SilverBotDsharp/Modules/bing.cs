@@ -133,7 +133,7 @@ namespace SilverBotDsharp.Modules
                 var thing = col.FindOne(x => x.ServerId == shit.GuildId && x.ChannelId == shit.Id);
                 if (thing != null)
                 {
-                    col.Delete(thing.ChannelId);
+                    col.DeleteMany(x => x.ChannelId == thing.ChannelId);
                     Channels.RemoveAll(x => x.Id == thing.ChannelId);
                     await ctx.RespondAsync($"well we deleted {shit.Id}");
                 }

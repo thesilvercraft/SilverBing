@@ -64,3 +64,13 @@ jobs:
          asset_path: ./SilverBingConfigUi.zip
          asset_name: SilverBingConfigUi.zip
          asset_content_type: application/zip
+    - name: Upload DLL Release Asset
+      id: upload-dll
+      uses: actions/upload-release-asset@v1
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+         upload_url: ${{ steps.create_release.outputs.upload_url }}
+         asset_path: .\SilverBotDsharp\bin\Release\net5.0\SilverBotDsharp.dll
+         asset_name: SilverBotDsharp.dll
+         asset_content_type: application/octet-stream
